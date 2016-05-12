@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 app.get('*', function (req, res) {
-  var ip = req.connection.remoteAddress;
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddres;
   var language =  req.headers["accept-language"];
   if(language.indexOf(',') > 0)
     language = language.substring(0, language.indexOf(','));
